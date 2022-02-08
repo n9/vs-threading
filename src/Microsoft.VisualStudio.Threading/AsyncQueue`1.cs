@@ -82,6 +82,17 @@ namespace Microsoft.VisualStudio.Threading
         }
 
         /// <summary>
+        /// Returns the list of elements currently in the queue.
+        /// </summary>
+        public IReadOnlyList<T> GetQueueElements()
+        {
+            lock (this.SyncRoot)
+            {
+                return (IReadOnlyList<T>?)this.queueElements?.ToList() ?? Array.Empty<T>();
+            }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether the queue has completed.
         /// </summary>
         /// <remarks>
